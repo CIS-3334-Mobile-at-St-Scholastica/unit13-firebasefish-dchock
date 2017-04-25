@@ -1,6 +1,7 @@
 package css.cis3334.fishlocatorfirebase;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     FishFirebaseData fishDataSource;
     DatabaseReference FishDbRef;
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,20 @@ public class MainActivity extends AppCompatActivity {
         setupAddButton();
         setupDetailButton();
         setupDeleteButton();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() { //initialized mAuthListener
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                //track the user when they sign in or out using the firebaseAuth
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // User is signed out
+                    Log.d("CSS3334","onAuthStateChanged - User NOT is signed in");
+                    Intent signInIntent = new Intent(getBaseContext(), LoginActivity.class);
+                    startActivity(signInIntent);
+                }
+            }
+        };
     }
 
     private void setupFirebaseDataChange() {
@@ -59,6 +81,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener); //adds a listener to the object
+    }
+
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) { //checks for an instance of mAuthListener
+            mAuth.removeAuthStateListener(mAuthListener);  //if there is, it will be removed
+        }
     }
 
     private void setupListView() {

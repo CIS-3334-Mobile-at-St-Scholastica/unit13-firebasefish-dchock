@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="css.cis3334.fishlocatorfirebase.LoginActivity">
+
+    <Button
+        android:text="@string/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonLogin"
+        android:onClick="onClick"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="27dp"
+        android:layout_below="@+id/editTextPassword"
+        android:layout_alignStart="@+id/editTextPassword"
+        android:layout_marginStart="12dp" />
+
+    <Button
+        android:text="@string/create_new_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonNewUser"
+        android:onClick="onClick"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="14dp"
+        android:layout_alignTop="@+id/buttonLogin"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="102dp" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="89dp"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/textView10"
+        android:layout_alignStart="@+id/textView11" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="187dp"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/textView11"
+        android:layout_alignStart="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="112dp"
+        android:layout_height="24dp"
+        android:text="@string/enter_email"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="61dp"
+        android:layout_marginTop="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/editTextEmail" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="115dp"
+        android:layout_height="28dp"
+        android:text="@string/enter_password"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="145dp"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/editTextEmail"
+        android:layout_alignStart="@+id/buttonNewUser" />
+
+</RelativeLayout>
